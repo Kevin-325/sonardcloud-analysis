@@ -1,0 +1,47 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Analyze with SonarCloud
+    runs-on: ubuntu-latest
+
+    steps:
+      # Récupère ton code
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Nécessaire pour une analyse complète
+
+      # Installe Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # Installe les dépendances du projet
+      - name: Install dependencies
+        run: npm install
+
+      # Cache les fichiers SonarCloud pour accélérer les prochaines analyses
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      # Analyse SonarCloud
+      - name: Run SonarCloud analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          npx sonar-scanner \
+            -Dsonar.projectKey=kevin-325 \
+            -Dsonar.organization=MbaKevin \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.sources=.
