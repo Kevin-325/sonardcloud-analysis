@@ -1,0 +1,12 @@
+{
+  "name": "mon-projet",
+  "version": "1.0.0",
+  "description": "Exemple de projet JavaScript à analyser avec SonarCloud",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"No tests yet\""
+  },
+  "author": "Mba Kevin",
+  "license": "MIT"
+}
