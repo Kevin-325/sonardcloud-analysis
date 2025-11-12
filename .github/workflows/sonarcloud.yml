@@ -41,7 +41,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           npx sonar-scanner \
-            -Dsonar.projectKey=kevin-325 \
+            -Dsonar.projectKey=Kevin-325_sonardcloud-analysis \
             -Dsonar.organization=MbaKevin \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.sources=.
